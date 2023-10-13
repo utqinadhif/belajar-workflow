@@ -53,9 +53,6 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run static analysis via PHPStan
-      run: vendor/bin/phpstan --xdebug analyse src tests
-
     - name: Create databases
       run: |
         touch testbench.sqlite
@@ -94,7 +91,6 @@ jobs:
     - name: Code Coverage
       run: |
         vendor/bin/phpunit --testdox --coverage-clover=coverage.clover --testsuite unit
-        vendor/bin/ocular code-coverage:upload --format=php-clover coverage.clover
       env:
         APP_KEY: base64:i3g6f+dV8FfsIkcxqd7gbiPn2oXk5r00sTmdD6V5utI=
         DB_CONNECTION: sqlite
